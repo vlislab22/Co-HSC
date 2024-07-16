@@ -3,11 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EvINR</title>
-    <meta name="author" content="Zipeng Wang">
-    <meta name="description" content="Project page of EvINR">
+    <title>Co-HSC</title>
+    <meta name="author" content="Minjie Liu">
+    <meta name="description" content="Project page of Co-HSC">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="eccv_logo.png">
     
     <!-- 样式 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -28,10 +27,7 @@
     <div class="container" id="main">
         <div class="row">
             <h1 class="col-md-12 text-center">
-                Revisit Event Generation Model: Self-Supervised Learning of Event-to-Video Reconstruction with Implicit Neural Representations<br /> 
-                <small>
-                    ECCV 2024
-                </small>
+                Co-HSC: Complementary Image-Mesh Fusion for Dense Human-Scene Contact Estimation<br /> 
             </h1>
         </div>
         
@@ -39,17 +35,12 @@
             <div class="col-md-12 text-center">
                 <ul class="list-inline">
                     <li>
-                        <img src="./images/zipeng.jpg" height="80px"><br>
-                        <a href="https://wzpscott.github.io/">Zipeng Wang</a><br />
+                        <img src="images/photo/lmj.jpg" height="80px"><br>
+                        <a>Minjie Liu</a><br />
                         AI Thrust, HKUST(GZ)<br /> &nbsp &nbsp
                     </li>
                     <li>
-                        <img src="./images/yunfan.jpeg" height="80px"><br>
-                        <a href="https://github.com/yunfanLu">Yunfan Lu</a><br />
-                        AI Thrust, HKUST(GZ)<br /> &nbsp &nbsp
-                    </li>
-                    <li>
-                        <img src="./images/Addision.png" height="80px"><br>
+                        <img src="images/photo/wanglin.jpeg" height="80px"><br>
                         <a href="https://addisonwang2013.github.io/vlislab/linwang.html">Addison Lin Wang</a><br />
                         AI & CMA Thrust, HKUST(GZ)<br /> Dept. of CSE, HKUST
                     </li>
@@ -57,47 +48,38 @@
             </div>
         </div>
 
-        <!-- ##### 元素 #####-->
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center">
-                <ul class="nav nav-pills nav-justified">
-                    <li>
-                        <a href="">
-                            <img src="./images/arxiv.png" height="100px"><br>
-                            <h4><strong>Paper</strong></h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="./images/github_icon.jpg" height="100px"><br>
-                            <h4><strong>Code</strong></h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://vlislab22.github.io/vlislab/">
-                            <img src="./images/lab_logo.png" height="100px"><br>
-                            <h4><strong>Vlislab</strong></h4>
-                        </a>
-                    </li>                       
-                </ul>
-            </div>
-        </div>
 
         <!-- ##### 摘要 #####-->
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>Abstract</h3>
                 <p class="text-justify">
-                    Reconstructing intensity frames from event data while maintaining high temporal resolution and dynamic range is crucial for bridging the gap between event-based and frame-based computer vision. 
-                    Previous approaches have depended on supervised learning on synthetic data, which lacks interpretability and risk over-fitting to the setting of the event simulator. 
-                    Recently, self-supervised learning (SSL) based methods, which primarily utilize per-frame optical flow to estimate intensity via photometric constancy,  has been actively investigated. However, they are vulnerable to errors in the case of inaccurate optical flow.
-                    This paper proposes a novel SSL event-to-video reconstruction approach, dubbed EvINR, which eliminates the need for labeled data or optical flow estimation.
-                    Our core idea is to reconstruct intensity frames by directly addressing the event generation model, essentially a partial differential equation (PDE) that describes how events are generated based on the time-varying brightness signals.
-                    Specifically, we utilize an implicit neural representation (INR), which takes in spatiotemporal coordinate (x, y, t) and predicts intensity values, to represent the solution of the event generation equation. 
-                    The INR, parameterized as a fully-connected Multi-layer Perceptron (MLP), can be optimized with its temporal derivatives supervised by events.
-                    To make EvINR feasible for online requisites, we propose several acceleration techniques that substantially expedite the training process. 
-                    Comprehensive experiments demonstrate that our EvINR surpasses previous SSL methods by 38% w.r.t. Mean Squared Error (MSE) and is comparable or superior to SoTA supervised methods.  
+                    Humans rely on physical contact with 3D world scenes to move and carry out tasks. 
+                    This spotlights the importance of estimating 3D human-scene contact (HSC) – understanding how humans interact with their surroundings.
+                    Compared to predicting human contact with specific objects or scenes with
+                    3D shape priors, recent research endeavors focus on 3D HSC estimation only
+                    from a single RGB image. However, images offer monocular and occluded
+                    visual information and thus cause spatial and geometric ambiguity. In this
+                    paper, we find that 3D parametric human mesh can provide spatial and
+                    geometric information simultaneously, which might be a beneficial comple-
+                    mentary to the visual information of the image. In light of this, we propose a
+                    novel two-branch framework, called Co-HSC, that subtly integrates multi-
+                    level image features and mesh features and facilitates each other’s learning
+                    when inferring dense 3D HSC from an RGB image. Specifically, we propose
+                    a Bi-directional Complementary Fusion (BCF) module to merge the multi-
+                    level image features and mesh features from the 2D Image Space and 3D
+                    Mesh Space and make them complement each other. In the BCF module,
+                    we first sample image features to 3D Mesh Space and then learn the geo-
+                    metric and global spatial information of the mesh features, complementing
+                    the local visual information of the image features. Then, the mesh features
+                    are integrated with the image features. Moreover, we introduce Dense Mesh
+                    Up-sampling (DMU) to up-sample sparse mesh features and output dense
+                    contact prediction by extracting the topology information of mesh features
+                    and utilizing the geometric mapping relationship. Experiments on the HSC
+                    datasets demonstrate that our method improves F1 by 0.04 and 0.07 on
+                    DAMON and RICH datasets, respectively
                 </p>
+                <img src="images/0705/cover-figure-v3.png" class="img-responsive" alt="vis_res" class="center">
             </div>
         </div>
       
@@ -107,26 +89,26 @@
             <div class="col-md-8 col-md-offset-2">
                 <h3>Overview</h3>
                 <p class="text-justify">
-                    A fully connected MLP is used to implicitly solve the event generation equation. The temporal gradient of the MLP is supervised by temporal intensity changes of events, and the spatial gradient is penalized to reduce noise.
+                    Overview of the proposed Co-HSC. It consists of two feature spaces, \ie, 2D Image Space and 3D Mesh Space. The Bi-directional Complementary Fusion (BCF) module fuses the image features and mesh features and makes them complement each other at multiple feature levels. Finally, GCN-based Dense Mesh Up-sampling (DMU) up-samples the sparse mesh features to the dense contact prediction.
                 </p>
-                <img src="./images/framework.png" class="img-responsive" alt="vis_res" class="center">
+                <img src="images/0705/whole_framework.png" class="img-responsive" alt="vis_res" class="center">
             </div>
         </div>
       
       <div class="row">     
             <div class="col-md-8 col-md-offset-2">
-                <h3>Quantitative Results</h3>
+                <h3>Qualitative evaluation on DAMON dataset</h3>
                 <p class="text-justify">
-                    Comparison of quantitative results on the IJRR, HQF, and AED datasets. Bold values indicate the best results among all methods, while underlined values indicate the best results among SSL methods.
+                    Qualitative evaluation on DAMON dataset. The green area shows the ground-truth (GT)/predicted contact.
                 </p>
-                <img src="./images/results_table.png" class="img-responsive" alt="vis_res" class="center">
+                <img src="images/vis_result/damon_vis.png" class="img-responsive" alt="vis_res" class="center">
             </div>
             <div class="col-md-8 col-md-offset-2">
-                <h3>Qualitative Results</h3>
+                <h3>Qualitative evaluation on RICH dataset</h3>
                 <p class="text-justify">
-                    Qualitative comparison with baseline methods on IJRR(Row 1&2), HQF (Row 3&4) and AED(Row 5&6).
+                    Qualitative evaluation on RICH dataset. The green area shows the ground-truth (GT)/predicted contact.
                 </p>
-                <img src="./images/results_visual.png" class="img-responsive" alt="vis_res" class="center">
+                <img src="images/vis_result/rich_vis.png" class="img-responsive" alt="vis_res" class="center">
             </div>
         </div>
 
@@ -139,10 +121,9 @@
                     <div class="col py-3">
                         <pre class="border" style="text-align: left;">
 @article{wang2024EvINR,
-  title={Revisit Event Generation Model: Self-Supervised Learning of Event-to-Video Reconstruction with Implicit Neural Representations},
-  author={Wang, Zipeng and Lu, Yunfan and Wang, Lin},
-  journal={ECCV},
-  year={2024}
+  title={Co-HSC: Complementary Image-Mesh Fusion for Dense Human-Scene Contact Estimation},
+  author={Liu, Minjie and Wang, Lin},
+  years={2024}
 }
                         </pre>
                     </div>
